@@ -1,0 +1,13 @@
+{
+  "name": "juhot-bot",
+  "version": "1.0.0",
+  "dependencies": {
+    "@types/node": "^12.12.11",
+    "telegraf": "^3.33.3",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts"
+  }
+}
