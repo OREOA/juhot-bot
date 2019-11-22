@@ -1,4 +1,8 @@
 {
   "name": "juhot-bot",
-  "script": "./src/index.ts"
+  "script": "./src/index.ts",
+  "watch": true,
+  "output": "~/bot-logs/out.log",
+  "error": "~/bot-logs/error.log",
+  "merge_logs": true
 }
