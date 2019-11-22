@@ -1,3 +1,6 @@
+import dotenv from 'dotenv'
+dotenv.config()
+
 const API_URL = process.env.API_URL
 const BASE_URL = process.env.BASE_URL
 const ENABLE_FREE_TEXT = process.env.ENABLE_FREE_TEXT
