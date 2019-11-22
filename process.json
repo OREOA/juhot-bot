@@ -1,4 +1,4 @@
 {
   "name": "juhot-bot",
-  "script": "./src/index.js"
+  "script": "./src/index.ts"
 }
