@@ -4,11 +4,13 @@
   "dependencies": {
     "@types/node": "^12.12.11",
     "dotenv": "^8.2.0",
+    "nodemon": "^2.0.1",
     "telegraf": "^3.33.3",
     "ts-node": "^8.5.2",
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "watch": "nodemon --watch '*.ts' --exec 'ts-node' src/index.ts"
   }
 }
