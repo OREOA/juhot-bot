@@ -32,9 +32,11 @@ bot.on("message", ({ message, reply, replyWithSticker }) => {
     if (text && containsKeyword(text, SUSSIS)) {
         replyWithSticker(stickers.sussi)
     }
-    
+
     if (text && now >= nextHuutisTime && containsKeyword(text, HUUTIS)) {
         nextHuutisTime = now + rand()
-        reply(HUUTIS_ANSWERS[Math.floor(Math.random()*HUUTIS_ANSWERS.length)])
+        setTimeout(() => {
+            reply(HUUTIS_ANSWERS[Math.floor(Math.random()*HUUTIS_ANSWERS.length)])
+        }, 500 + Math.random()*10000)
     }
 })
