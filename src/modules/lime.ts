@@ -8,37 +8,32 @@ const HUUTIS_ANSWERS = ['😂😂😂😂', 'huutista', ':DDDD', 'huu', 'huutita
 
 const rand = () => Math.random() * 5 * 60 * 60 * 1000 + INTERVAL
 
-const containsSussi = (text: string) => {
-    for (let sussi of SUSSIS) {
-        if (text.toLowerCase().includes(sussi)) {
+const containsKeyword = (text:string, keywords: Array<string>) => {
+    for (let keyword of keywords) {
+        if (text.toLowerCase().includes(keyword)) {
             return true
         }
     }
     return false
 }
 
-const containsHuutista = (text: string) => {
-    for (let huutis of HUUTIS) {
-        if (text.toLowerCase().includes(huutis)) {
-            return true
-        }
-    }
-}
-
 let nextTime = -Infinity
 let nextHuutisTime = -Infinity
 bot.on("message", ({ message, reply, replyWithSticker }) => {
     const sender = message && message.from && message.from.username
+    const text = message && message.text
     const now = Date.now()
+
     if (sender === "Limeuz" && now >= nextTime) {
         nextTime = now + rand()
         reply("Ääääää limeeeeuz")
     }
-    const text = message && message.text
-    if (text && containsSussi(text)) {
+
+    if (text && containsKeyword(text, SUSSIS)) {
         replyWithSticker(stickers.sussi)
     }
-    if (text && now >= nextHuutisTime && containsHuutista(text)) {
+    
+    if (text && now >= nextHuutisTime && containsKeyword(text, HUUTIS)) {
         nextHuutisTime = now + rand()
         reply(HUUTIS_ANSWERS[Math.floor(Math.random()*HUUTIS_ANSWERS.length)])
     }
