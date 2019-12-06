@@ -8,7 +8,7 @@ const rand = () => Math.random() * 5 * 60 * 60 * 1000 + INTERVAL
 
 const containsSussi = (text: string) => {
     for (let sussi of SUSSIS) {
-        if (text.includes(sussi)) {
+        if (text.toLowerCase().includes(sussi)) {
             return true
         }
     }
