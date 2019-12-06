@@ -41,17 +41,17 @@ bot.on("message", ({ message, reply, replyWithSticker }) => {
         
     }
 
-    if (text && now >= nextHuutisTime && containsKeyword(text, HUUTIS)) {
+    if (text && now >= nextHuutisTime && Math.random() < 0.5 && containsKeyword(text, HUUTIS)) {
         nextHuutisTime = now + rand()
         setTimeout(() => {
             reply(HUUTIS_ANSWERS[Math.floor(Math.random()*HUUTIS_ANSWERS.length)])
         }, 500 + Math.random()*10000)
     }
 
-    if (text && now >= nextBadWordTime && containsKeyword(text, BAD_WORDS)) {
+    if (text && now >= nextBadWordTime && Math.random() < 0.5 && containsKeyword(text, BAD_WORDS)) {
         nextBadWordTime = now + rand()
         setTimeout(() => {
-            reply(`@${sender} lopeta se vitun kiroilu`)
+            reply(`@${sender} lopeta toi vitun kiroilu`)
         }, 300 + Math.random()*700)
     }
 })
