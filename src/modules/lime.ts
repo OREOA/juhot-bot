@@ -1,7 +1,10 @@
 import bot from "../bot"
 import stickers from "../stickers.json"
 
+const TWO_DAYS = 48 * 60 * 60 * 1000
 const INTERVAL = 30 * 60 * 1000
+const ANA_PEOPLE = ['Peussan', 'Juhon', 'Nässin', 'Limen', 'Rikun']
+const ANA_SUBJECT = ['opinnoista', 'töistä', 'naisista']
 const SUSSIS = ['sussi', 'sushi', 'könnitsiva', 'konnichiwa', 'konnitsiva', 'könnichiwa']
 const HUUTIS = ['😂', 'huutista', ':d']
 const BAD_WORDS = ['vittu', 'vitun', 'paska', 'helvetti', 'helvetin', 'saatana', 'saatanan']
@@ -18,10 +21,34 @@ const containsKeyword = (text:string, keywords: Array<string>) => {
     return false
 }
 
+const initializeAna = (reply: Function, replyWithSticker: Function):NodeJS.Timeout => {
+    return setTimeout(() => {
+        heiHei(reply, replyWithSticker)
+        return initializeAna(reply, replyWithSticker)
+    }, Math.random()*TWO_DAYS)
+}
+
+const heiHei = (reply: Function, replyWithSticker: Function) => {
+    replyWithSticker(stickers.ana)
+    setTimeout(() => {
+        reply("Hei hei")
+    }, 2000)
+    setTimeout(() => {
+        reply(`Olisiko teillä hetki aika puhua ${ANA_PEOPLE[Math.floor(Math.random()*ANA_PEOPLE.length)]} ${ANA_SUBJECT[Math.floor(Math.random()*ANA_SUBJECT.length)]}?`)
+    }, 4000)
+}
+
+let ana: NodeJS.Timeout | null = null
+
 let nextTime = -Infinity
 let nextHuutisTime = -Infinity
 let nextBadWordTime = -Infinity
 bot.on("message", ({ message, reply, replyWithSticker }) => {
+    // idk how to do this the smart way
+    if (!ana) {
+        ana = initializeAna(reply, replyWithSticker)
+    }
+
     const sender = message && message.from && message.from.username
     const text = message && message.text
     const now = Date.now()
