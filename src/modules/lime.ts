@@ -9,6 +9,8 @@ const SUSSIS = ['sussi', 'sushi', 'könnitsiva', 'konnichiwa', 'konnitsiva', 'k�
 const HUUTIS = ['😂', 'huutista', ':d']
 const BAD_WORDS = ['vittu', 'vitun', 'paska', 'helvetti', 'helvetin', 'saatana', 'saatanan']
 const HUUTIS_ANSWERS = ['😂😂😂😂', 'huutista', ':DDDD', 'huu', 'huutitata', ':--D']
+const GOOD_BOT = ['good bot', 'hyvä botti']
+const BAD_BOT = ['bad bot', 'shit bot', 'paska botti']
 
 const rand = () => Math.random() * 5 * 60 * 60 * 1000 + INTERVAL
 
@@ -33,8 +35,10 @@ const heiHei = (reply: Function, replyWithSticker: Function) => {
     setTimeout(() => {
         reply("Hei hei")
     }, 2000)
+    const peopleIndex = Math.floor(Math.random()*ANA_PEOPLE.length)
+    const subjectIndex = Math.floor(Math.random()*ANA_SUBJECT.length)
     setTimeout(() => {
-        reply(`Olisiko teillä hetki aika puhua ${ANA_PEOPLE[Math.floor(Math.random()*ANA_PEOPLE.length)]} ${ANA_SUBJECT[Math.floor(Math.random()*ANA_SUBJECT.length)]}?`)
+        reply(`Olisiko teillä hetki aika puhua ${ANA_PEOPLE[peopleIndex]} ${ANA_SUBJECT[subjectIndex]}?`)
     }, 4000)
 }
 
@@ -75,10 +79,19 @@ bot.on("message", ({ message, reply, replyWithSticker }) => {
         }, 500 + Math.random()*10000)
     }
 
-    if (text && now >= nextBadWordTime && Math.random() < 0.5 && containsKeyword(text, BAD_WORDS)) {
+
+    if (text && containsKeyword(text, BAD_BOT)) {
+        console.log("Bad bot said")
+        reply("haista paska")
+    } else if (text && now >= nextBadWordTime && Math.random() < 0.5 && containsKeyword(text, BAD_WORDS)) {
         nextBadWordTime = now + rand()
         setTimeout(() => {
             reply(`@${sender} lopeta toi vitun kiroilu`)
         }, 300 + Math.random()*700)
+    }
+
+    if (text && containsKeyword(text, GOOD_BOT)) {
+        console.log("Good bot said")
+        reply("kiitos")
     }
 })
