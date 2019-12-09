@@ -10,6 +10,7 @@ const HUUTIS = ['😂', 'huutista', ':d']
 const BAD_WORDS = ['vittu', 'vitun', 'paska', 'helvetti', 'helvetin', 'saatana', 'saatanan']
 const HUUTIS_ANSWERS = ['😂😂😂😂', 'huutista', ':DDDD', 'huu', 'huutitata', ':--D']
 const GOOD_BOT = ['good bot', 'hyvä botti']
+const PENNIT = ['viisi penniä', 'viisi-penniä', 'viiteen penniin', 'penni', 'viis penniä']
 const BAD_BOT = ['bad bot', 'shit bot', 'paska botti', 'huono botti']
 
 const rand = () => Math.random() * 5 * 60 * 60 * 1000 + INTERVAL
@@ -79,6 +80,10 @@ bot.on("message", ({ message, reply, replyWithSticker }) => {
         }, 500 + Math.random()*10000)
     }
 
+    
+    if (text && containsKeyword(text, PENNIT)) {
+        replyWithSticker(stickers.viisi_penniä)
+    }
 
     if (text && containsKeyword(text, BAD_BOT)) {
         console.log("Bad bot said")
