@@ -12,6 +12,7 @@ const HUUTIS_ANSWERS = ['😂😂😂😂', 'huutista', ':DDDD', 'huu', 'huutita
 const GOOD_BOT = ['good bot', 'hyvä botti']
 const PENNIT = ['viisi penniä', 'viisi-penniä', 'viiteen penniin', 'penni', 'viis penniä']
 const BAD_BOT = ['bad bot', 'shit bot', 'paska botti', 'huono botti']
+const PAKSU_AKU = ['paksu aku', 'paksu-aku', 'on se paksu', 'himoläski', 'paksukainen']
 
 const rand = () => Math.random() * 5 * 60 * 60 * 1000 + INTERVAL
 
@@ -48,7 +49,8 @@ let ana: NodeJS.Timeout | null = null
 let nextTime = -Infinity
 let nextHuutisTime = -Infinity
 let nextBadWordTime = -Infinity
-bot.on("message", ({ message, reply, replyWithSticker }) => {
+bot.on("message", ({ message, reply, replyWithSticker, replyWithVideo }) => {
+    console.log(message)
     // idk how to do this the smart way
     if (!ana) {
         ana = initializeAna(reply, replyWithSticker)
@@ -83,6 +85,11 @@ bot.on("message", ({ message, reply, replyWithSticker }) => {
     
     if (text && containsKeyword(text, PENNIT)) {
         replyWithSticker(stickers.viisi_penniä)
+    }
+
+    if (text && containsKeyword(text, PAKSU_AKU)) {
+        replyWithVideo('BAADBAAD1gYAAtAmcVPfp_-kuHehWxYE')
+        reply('On se paksu! Slurps!')
     }
 
     if (text && containsKeyword(text, BAD_BOT)) {
