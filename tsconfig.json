@@ -11,9 +11,11 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "strict": true,
-    "target": "es6"
+    "target": "es6",
+    "typeRoots" : ["node_modules/@types", "./typings"]
   },
   "include": [
     "src"
-  ]
+  ],
+  "files": ["src/types.d.ts"],
 }
