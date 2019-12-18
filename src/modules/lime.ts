@@ -1,7 +1,7 @@
 import bot from "../bot"
 import stickers from "../stickers.json"
 
-const TWO_DAYS = 48 * 60 * 60 * 1000
+const ONE_DAY = 24 * 60 * 60 * 1000
 const INTERVAL = 30 * 60 * 1000
 const ANA_PEOPLE = ['Peussan', 'Juhon', 'Nässin', 'Limen', 'Rikun']
 const ANA_SUBJECT = ['opinnoista', 'töistä', 'naisista']
@@ -29,7 +29,7 @@ const initializeAna = (reply: Function, replyWithSticker: Function):NodeJS.Timeo
     return setTimeout(() => {
         heiHei(reply, replyWithSticker)
         return initializeAna(reply, replyWithSticker)
-    }, Math.random()*TWO_DAYS)
+    }, ONE_DAY + Math.random() * ONE_DAY)
 }
 
 const heiHei = (reply: Function, replyWithSticker: Function) => {
