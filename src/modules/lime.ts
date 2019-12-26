@@ -3,8 +3,8 @@ import stickers from "../stickers.json"
 
 const ONE_DAY = 24 * 60 * 60 * 1000
 const INTERVAL = 30 * 60 * 1000
-const ANA_PEOPLE = ['Peussan', 'Juhon', 'Nässin', 'Limen', 'Rikun']
-const ANA_SUBJECT = ['opinnoista', 'töistä', 'naisista']
+const ANA_PEOPLE = ['Peussan', 'Juhon', 'Nässin', 'Limen', 'Rikun', 'Otson']
+const ANA_SUBJECT = ['opinnoista', 'töistä', 'naisista', 'jumppaamisesta']
 const SUSSIS = ['sussi', 'sushi', 'könnitsiva', 'konnichiwa', 'konnitsiva', 'könnichiwa']
 const HUUTIS = ['😂', 'huutista', ':d']
 const BAD_WORDS = ['vittu', 'vitun', 'paska', 'helvetti', 'helvetin', 'saatana', 'saatanan']
