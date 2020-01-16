@@ -8,4 +8,4 @@ const database = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   dialect: 'postgres'
 })
 
-module.exports = database
+export default database
