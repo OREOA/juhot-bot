@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize')
+import { Sequelize } from 'sequelize-typescript'
 import config from "./config"
 
 const { DB_NAME, DB_USER, DB_PASSWORD, DB_HOST } = config

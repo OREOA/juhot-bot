@@ -1,15 +1,14 @@
-const database = require('../db.js')
-const Sequelize = require('sequelize')
+import {Model, Column, Table} from "sequelize-typescript"
 
-const Shortcut = database.define('shortcut', {
-  shortcode: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
-  sticker: {
-    type: Sequelize.STRING,
-    allowNull: false
-  }
-})
+@Table
+export class Shortcut extends Model<Shortcut> {
 
-module.exports = Shortcut
+  @Column
+  shortcode!: string;
+
+  @Column
+  sticker!: string;
+}
+
+
+export default Shortcut
