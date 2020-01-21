@@ -17,17 +17,22 @@ bot.command(["pottu", "poika"], ({ replyWithSticker }) => replyWithSticker(stick
 bot.hears(["Glom", "glom"], ({ replyWithSticker }) => replyWithSticker(stickers.glom))
 bot.command("glom", ({ replyWithSticker }) => replyWithSticker(stickers.glom))
 
-bot.command('events', async (ctx) => {
-    ctx.reply('test')
+bot.command('kaljaa', (ctx) => {
+    ctx.reply('Kaljaa seuraavina päivinä:')
     events.calendar.events.list({
         auth: events.jwtClient,
-        calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com'
+        calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com',
+        timeMin: new Date().toISOString()
     }, (err: any, response: any) => {
         if (err) {
-            ctx.reply('error')
+            console.log(err)
+            ctx.reply('Ei kaljaa')
         } else {
             console.log(response.data.items)
-            ctx.reply(JSON.stringify(response.data.items))
+            response.data.items.forEach((e: any) => {
+                const date = e.start.date || e.start.dateTime
+                ctx.reply(`${date}: ${e.summary}`)
+            })
         }
     })
 })

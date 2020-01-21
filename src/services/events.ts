@@ -1,5 +1,5 @@
 import { google } from "googleapis"
-import privatekey from "../google.json"
+import privatekey from "../../google.json"
 const calendar = google.calendar('v3')
 
 
