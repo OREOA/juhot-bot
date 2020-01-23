@@ -18,6 +18,19 @@ const parseDate = (start: Date) => {
   return `${date} ${time}`
 }
 
+const getBeerDates = () => {
+  const date = new Date()
+  const day = date.getDay()
+  const days = [5, 6, 12, 13].map(d => d - day)
+  console.log(days)
+  return days.map((d) => {
+    const today = new Date()
+    const beerDate = new Date(today.setDate(today.getDate() + d))
+    return `/milloin ${beerDate.toISOString().split('T')[0]}`
+  })
+}
+
 export default {
-  parseDate
+  parseDate,
+  getBeerDates
 }
