@@ -10,7 +10,6 @@ bot.hears(["Glom", "glom"], ({ replyWithSticker }) => replyWithSticker(stickers.
 bot.command("glom", ({ replyWithSticker }) => replyWithSticker(stickers.glom))
 
 bot.command('kaljaa', (ctx) => {
-    ctx.reply('Kaljaa seuraavina päivinä:')
     events.calendar.events.list({
         auth: events.jwtClient,
         calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com',
@@ -25,7 +24,7 @@ bot.command('kaljaa', (ctx) => {
             const events = response.data.items.map((e: any) => (
                 `${tools.parseDate(e.start)}: ${e.summary}`
             ))
-            ctx.reply(events.join('\n'))
+            ctx.reply(`Kaljaa seuraavina päivinä:\n\n${events.join('\n')}`)
         }
     })
 })
