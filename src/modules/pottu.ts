@@ -25,7 +25,7 @@ bot.command('kaljaa', (ctx) => {
             const events = response.data.items.map((e: any) => (
                 `${tools.parseDate(e.start)}: ${e.summary}`
             ))
-            ctx.reply(events.join('\n'))
+            ctx.reply(`Kaljaa seuravina päivinä:\n${events.join('\n')}`)
         }
     })
 })
@@ -41,15 +41,51 @@ const beerEvent = {
 }
 
 bot.command('oispakaljaa', (ctx) => {
-    beerEvent.summary = ''
-    beerEvent.start.date = ''
-    beerEvent.end.date = ''
-    ctx.reply('Milloin', Markup
-        .keyboard(tools.getBeerDates())
-        .oneTime()
-        .resize()
-        .extra()
-    )
+    if (ctx.message !== undefined && ctx.message.text !== undefined) {
+        if (ctx.message.text.length === 12) {
+            beerEvent.summary = ''
+            beerEvent.start.date = ''
+            beerEvent.end.date = ''
+            ctx.reply('Milloin', Markup
+                .keyboard(tools.getBeerDates())
+                .oneTime()
+                .resize()
+                .extra()
+            )
+        } else {
+            const regex = /(\d+)\.(\d+)\. (\d+):(\d+) (.+)/gi
+            const result = regex.exec(ctx.message.text)
+            const year = new Date().getFullYear()
+            if (result !== null) {
+                const dateTime = `${year}-${result[2]}-${result[1]}T${result[3]}:${result[4]}:00+02:00`
+                events.calendar.events.insert({
+                    // @ts-ignore
+                    resource: {
+                        summary: result[5],
+                        start: {
+                            dateTime
+                        },
+                        end: {
+                            dateTime
+                        }
+                    },
+                    auth: events.jwtClient,
+                    calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com',
+                }, (err: any, response: any) => {
+                    if (err) {
+                        console.log(err)
+                        ctx.reply('Virhetilanne')
+                    } else {
+                        ctx.reply('Tapahtuma luotu!')
+                    }
+                })
+            } else {
+                ctx.reply('Väärä esitysmuoto\n/oispakaljaa DD.MM. HH:MM "Nimi"')
+            }
+        }
+    } else {
+        ctx.reply('Virhetilanne')
+    }
 })
 
 bot.command('milloin', (ctx) => {
