@@ -29,7 +29,7 @@ const initializeAna = (reply: Function, replyWithSticker: Function):NodeJS.Timeo
     return setTimeout(() => {
         heiHei(reply, replyWithSticker)
         return initializeAna(reply, replyWithSticker)
-    }, ONE_DAY + Math.random() * ONE_DAY * 50)
+    }, Math.min((ONE_DAY + Math.random() * ONE_DAY * 50), Math.pow(2, 53)))
 }
 
 const heiHei = (reply: Function, replyWithSticker: Function) => {
