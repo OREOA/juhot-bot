@@ -1,5 +1,5 @@
 import bot from "../bot"
-import {Markup} from "telegraf"
+import { Markup } from "telegraf"
 import stickers from "../stickers.json"
 import events from "../services/events"
 import tools from "../tools"
@@ -104,11 +104,11 @@ bot.command('nimi', (ctx) => {
         const name = ctx.message.text.slice(6)
         beerEvent.summary = name
         ctx.reply(`Luodaanko tapahtuma: ${beerEvent.summary}@${beerEvent.start.date}`, Markup
-        .keyboard(['/luo', '/ei'])
-        .oneTime()
-        .resize()
-        .extra()
-    )
+            .keyboard(['/luo', '/ei'])
+            .oneTime()
+            .resize()
+            .extra()
+        )
     } else {
         ctx.reply('Virhetilanne')
     }
@@ -127,10 +127,12 @@ bot.command('oispakaljaa', (ctx) => {
 })
 
 bot.command('ei', (ctx) => {
-    beerEvent.summary = ''
-    beerEvent.start.date = ''
-    beerEvent.end.date = ''
-    ctx.reply('Peruttu')
+    if (beerEvent.summary !== '') {
+        beerEvent.summary = ''
+        beerEvent.start.date = ''
+        beerEvent.end.date = ''
+        ctx.reply('Peruttu')
+    }
 })
 
 bot.command('luo', (ctx) => {
