@@ -1,16 +1,7 @@
 import bot from "../bot"
-import { Context, ContextMessageUpdate } from 'telegraf'
 import stickers from "../stickers.json"
 import events from "../services/events"
 import tools from "../tools"
-
-const replyWithSticker = (sticker: string) => (ctx: ContextMessageUpdate) => {
-    ctx.replyWithSticker(sticker)
-}
-
-bot.on("sticker", ({ message }) => {
-    const sticker = message && message.sticker
-})
 
 bot.hears(["pottu", "Pottu"], ({ replyWithSticker }) => replyWithSticker(stickers.pottu))
 bot.command(["pottu", "poika"], ({ replyWithSticker }) => replyWithSticker(stickers.pottu))
