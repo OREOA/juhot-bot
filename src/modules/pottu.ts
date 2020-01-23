@@ -136,17 +136,19 @@ bot.command('ei', (ctx) => {
 })
 
 bot.command('luo', (ctx) => {
-    events.calendar.events.insert({
-        // @ts-ignore
-        resource: beerEvent,
-        auth: events.jwtClient,
-        calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com',
-    }, (err: any, response: any) => {
-        if (err) {
-            console.log(err)
-            ctx.reply('Virhetilanne')
-        } else {
-            ctx.reply('Tapahtuma luotu!')
-        }
-    })
+    if (beerEvent.summary !== '') {
+        events.calendar.events.insert({
+            // @ts-ignore
+            resource: beerEvent,
+            auth: events.jwtClient,
+            calendarId: 'pmcgjlt8sqlvg43gp947a9ujmc@group.calendar.google.com',
+        }, (err: any, response: any) => {
+            if (err) {
+                console.log(err)
+                ctx.reply('Virhetilanne')
+            } else {
+                ctx.reply('Tapahtuma luotu!')
+            }
+        })
+    }
 })
