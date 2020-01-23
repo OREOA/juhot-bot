@@ -54,7 +54,6 @@ bot.command('oispakaljaa', (ctx) => {
 })
 
 bot.command('milloin', (ctx) => {
-    console.log(ctx.update.message)
     if (ctx.message !== undefined && ctx.message.text !== undefined) {
         const date = ctx.message.text.split(' ')[1]
         beerEvent.start.date = date
@@ -66,7 +65,6 @@ bot.command('milloin', (ctx) => {
 })
 
 bot.command('nimi', (ctx) => {
-    console.log(beerEvent)
     if (ctx.message !== undefined && ctx.message.text !== undefined) {
         const name = ctx.message.text.slice(6)
         beerEvent.summary = name
